@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lit + Shadow DOM Spatial Navigation & Inert Stack Demo</title>
+    <!-- Google Fonts Inter & Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./src/index.css" />
+    <script type="module" src="/src/main.ts"></script>
+  </head>
+  <body>
+    <!-- 전역 대시보드 UI (가상 D-pad 리포트 제공) -->
+    <header class="app-header">
+      <div class="logo">SpatialNav <span>Lite</span></div>
+      <div class="dpad-helper"> D-pad: <span>Use keyboard arrow keys</span></div>
+    </header>
+
+    <main id="app-container">
+      <!-- 페이지 1: 홈 스크린 -->
+      <lit-page id="page-home">
+        <div class="screen-card">
+          <h2>Page 1: Scrollable List & Navigation</h2>
+          <p class="description">
+            스크롤 가능 영역(lit-list) 내부의 리스트 아이템들에 포커스가 갔을 때, TalkBack 겹침 낭독 현상 없이 자연스러운 <strong>자동 스크롤 연동</strong>이 동작합니다.
+          </p>
+
+          <lit-list id="demo-list">
+            <lit-list-item id="item-1">✨ 1. D-pad Navigation Core</lit-list-item>
+            <lit-list-item id="item-2">🚀 2. Shadow DOM Traversal</lit-list-item>
+            <lit-list-item id="item-3">🔥 3. Automatic Smooth Scroll</lit-list-item>
+            <lit-list-item id="item-4">🎯 4. Viewport Geometry Calculation</lit-list-item>
+            <lit-list-item id="item-5">🛡️ 5. Stacked Inert Manager</lit-list-item>
+            <lit-list-item id="item-6">📦 6. Dual-Mode Build System</lit-list-item>
+            <lit-list-item id="item-7">💎 7. Curated Harmony Palette</lit-list-item>
+            <lit-list-item id="item-8">🌈 8. Micro Focus Transitions</lit-list-item>
+            <lit-list-item id="item-9">⚡ 9. Asynchronous Lit Lifecycle</lit-list-item>
+            <lit-list-item id="item-10">🎉 10. Robust Vitest Green Suite</lit-list-item>
+          </lit-list>
+
+          <div class="actions">
+            <lit-button id="btn-next">Next Page ➔</lit-button>
+          </div>
+        </div>
+      </lit-page>
+
+      <!-- 페이지 2: 상세 화면 (초기에는 비활성/생성 안 됨 - main.ts에서 적층 관리) -->
+      <lit-page id="page-detail" style="display: none;">
+        <div class="screen-card">
+          <h2>Page 2: Screen Stacking & Modal Trigger</h2>
+          <p class="description">
+            새로운 스크린이 올라오면, <code>InertManager</code>가 자동으로 하위 페이지(Page 1) 전체를 <code>inert</code> 속성으로 동결시켜 공간 연산 및 포커스 차단을 보장합니다.
+          </p>
+
+          <div class="actions vertical">
+            <lit-button id="btn-modal-open">Open Premium Dialog</lit-button>
+            <lit-button id="btn-back" class="secondary">◀ Back to Home</lit-button>
+          </div>
+        </div>
+      </lit-page>
+    </main>
+
+    <!-- 모달 다이얼로그 팝업 -->
+    <lit-modal id="modal-dialog">
+      <div class="modal-card">
+        <h3>Premium Dialog Box</h3>
+        <p class="modal-desc">
+          모달이 활성화된 동안 배경에 적층된 모든 화면은 완전히 비활성화(inert)되어, 탭 키나 D-pad 포커스가 밖으로 이탈하지 못하는 <strong>초경량 포커스 트랩</strong>이 브라우저 순수 명세로 자동 성립됩니다.
+        </p>
+        <div class="modal-actions">
+          <lit-button id="btn-modal-confirm">Confirm</lit-button>
+          <lit-button id="btn-modal-close" style="--indigo: #ef4444;">Close</lit-button>
+        </div>
+      </div>
+    </lit-modal>
+  </body>
+</html>
