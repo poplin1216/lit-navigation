@@ -1,0 +1,22 @@
+# Task Checklist
+
+- [x] **Phase 1: Project Setup**
+  - [x] Initialize Vite `lit-ts` project in current directory
+  - [x] Configure dual build setup in `vite.config.ts` (Demo app and Library Mode)
+  - [x] Configure `vitest` and `happy-dom` in `vitest.config.ts`
+  - [x] Add dual build and testing scripts in `package.json`
+  - [x] Install dependencies (`vitest`, `happy-dom`, `compute-scroll-into-view`, `vite-plugin-dts`)
+- [x] **Phase 2: Core Spatial Navigation & TDD**
+  - [x] Implement & Test `geometry.ts` (D-pad direction math and nearest node lookup)
+  - [x] Implement & Test `candidates.ts` (Recursively querying DOM & Shadow Roots, checking visibility/inert status)
+  - [x] Implement & Test `manager.ts` (Global event handler, D-pad control, auto-scroll integration)
+- [ ] **Phase 3: Inert Manager & TDD**
+  - [ ] Implement & Test `inert-manager.ts` (Screen/modal stacking logic, dynamic `inert` setting)
+- [ ] **Phase 4: Custom Lit Components**
+  - [ ] Implement `<lit-button>`
+  - [ ] Implement `<lit-page>` (integrated with InertManager)
+  - [ ] Implement `<lit-modal>` (integrated with InertManager)
+  - [ ] Implement `<lit-list>` and `<lit-list-item>` (integrated with automatic scroll focus)
+- [ ] **Phase 5: Verification & Demo**
+  - [ ] Build multi-stacked screens demo in `src/main.ts` or `index.html`
+  - [ ] Manually verify D-pad navigation, page pushes, modal dialog overlay, and auto-scrolling
