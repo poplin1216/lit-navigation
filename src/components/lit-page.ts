@@ -21,6 +21,7 @@ export class LitPage extends LitElement {
       opacity: 0.6;
       filter: grayscale(40%) blur(1px);
       pointer-events: none;
+      display: none;
     }
   `;
 

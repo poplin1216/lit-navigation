@@ -12,11 +12,11 @@ const appContainer = document.getElementById('app-container') as HTMLElement;
 
 // 초기 설정: page-detail을 DOM에서 일시 분리하여 page-home만 스택 최상단 활성 상태로 시작
 pageDetail.style.display = 'block'; // 숨김 속성 제거
-pageDetail.remove();
+// pageDetail.remove();
 
 // 2. 페이지 1 -> 페이지 2 화면 전환 (물리적 unmount/mount 연동)
 document.getElementById('btn-next')?.addEventListener('click', () => {
-  pageHome.remove();
+  // pageHome.remove();
   appContainer.appendChild(pageDetail);
 
   // 화면 전환 후 D-pad 첫 버튼 포커싱 유도
@@ -27,8 +27,9 @@ document.getElementById('btn-next')?.addEventListener('click', () => {
 
 // 3. 페이지 2 -> 페이지 1 화면 전환 복구 (물리적 unmount/mount 연동)
 document.getElementById('btn-back')?.addEventListener('click', () => {
+  console.log('back button click');
   pageDetail.remove();
-  appContainer.appendChild(pageHome);
+  // appContainer.appendChild(pageHome);
 
   // 화면 복구 후 D-pad 타깃 포커싱 유도
   setTimeout(() => {

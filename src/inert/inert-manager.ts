@@ -6,12 +6,13 @@ export class InertManager {
    * 기존 하위 스택은 모두 inert 속성을 부여하여 차단합니다.
    */
   public static push(element: HTMLElement) {
+    console.log('stack length: ', this.stack.length)
     if (this.stack.length > 0) {
       const prev = this.stack[this.stack.length - 1];
       prev.inert = true;
       prev.setAttribute('inert', '');
     }
-    
+
     element.inert = false;
     element.removeAttribute('inert');
     this.stack.push(element);
@@ -23,7 +24,7 @@ export class InertManager {
    */
   public static pop(): HTMLElement | null {
     if (this.stack.length === 0) return null;
-    
+
     const popped = this.stack.pop()!;
     popped.inert = true;
     popped.setAttribute('inert', '');
@@ -33,7 +34,7 @@ export class InertManager {
       prev.inert = false;
       prev.removeAttribute('inert');
     }
-    
+
     return popped;
   }
 
