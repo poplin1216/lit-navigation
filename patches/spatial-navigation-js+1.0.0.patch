@@ -1,0 +1,72 @@
+diff --git a/node_modules/spatial-navigation-js/spatial_navigation.js b/node_modules/spatial-navigation-js/spatial_navigation.js
+index 70882b7..f43b2d0 100644
+--- a/node_modules/spatial-navigation-js/spatial_navigation.js
++++ b/node_modules/spatial-navigation-js/spatial_navigation.js
+@@ -1208,6 +1208,67 @@
+       } else {
+         _defaultSectionId = sectionId;
+       }
++    },
++    
++    findNextTarget: function(direction, options) {
++      var currentFocusedElement = options && options.target ? options.target : getCurrentFocusedElement();
++      if (!currentFocusedElement) return null;
++      var currentSectionId = getSectionId(currentFocusedElement);
++      if (!currentSectionId) return null;
++
++      var extSelector = currentFocusedElement.getAttribute('data-sn-' + direction);
++      if (typeof extSelector === 'string') {
++        if (extSelector === '' || extSelector.charAt(0) == '@') return null;
++        return parseSelector(extSelector)[0] || null;
++      }
++
++      var sectionNavigableElements = {};
++      var allNavigableElements = [];
++      for (var id in _sections) {
++        sectionNavigableElements[id] = getSectionNavigableElements(id);
++        allNavigableElements = allNavigableElements.concat(sectionNavigableElements[id]);
++      }
++
++      var config = extend({}, GlobalConfig, _sections[currentSectionId]);
++      var next;
++
++      if (config.restrict == 'self-only' || config.restrict == 'self-first') {
++        var currentSectionNavigableElements = sectionNavigableElements[currentSectionId];
++        next = navigate(currentFocusedElement, direction, exclude(currentSectionNavigableElements, currentFocusedElement), config);
++        if (!next && config.restrict == 'self-first') {
++          next = navigate(currentFocusedElement, direction, exclude(allNavigableElements, currentSectionNavigableElements), config);
++        }
++      } else {
++        next = navigate(currentFocusedElement, direction, exclude(allNavigableElements, currentFocusedElement), config);
++      }
++
++      if (next) {
++        var nextSectionId = getSectionId(next);
++        if (currentSectionId != nextSectionId) {
++          if (_sections[currentSectionId].leaveFor && _sections[currentSectionId].leaveFor[direction] !== undefined) {
++            var leaveForNext = _sections[currentSectionId].leaveFor[direction];
++            if (typeof leaveForNext === 'string' && leaveForNext !== '') {
++               if (leaveForNext.charAt(0) !== '@') {
++                  next = parseSelector(leaveForNext)[0];
++               }
++            }
++          } else {
++            var enterToElement;
++            switch (_sections[nextSectionId].enterTo) {
++              case 'last-focused':
++                enterToElement = getSectionLastFocusedElement(nextSectionId) || getSectionDefaultElement(nextSectionId);
++                break;
++              case 'default-element':
++                enterToElement = getSectionDefaultElement(nextSectionId);
++                break;
++            }
++            if (enterToElement) {
++              next = enterToElement;
++            }
++          }
++        }
++      }
++      return next;
+     }
+   };
+ 

@@ -75,7 +75,7 @@ export class LitButton extends LitElement {
 
   render() {
     return html`
-      <button ?disabled=${this.disabled} tabindex="-1">
+      <button part="button" ?disabled=${this.disabled} tabindex="-1">
         <slot></slot>
       </button>
     `;

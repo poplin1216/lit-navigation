@@ -27,7 +27,7 @@
     <lit-page id="page-home">
       <div class="screen-card">
         <h2>Page 1: Scrollable List & Navigation</h2>
-        <button class="description">
+        <button class="description" tabindex="0">
           스크롤 가능 영역(lit-list) 내부의 리스트 아이템들에 포커스가 갔을 때, TalkBack 겹침 낭독 현상 없이 자연스러운 <strong>자동 스크롤 연동</strong>이 동작합니다.
         </button>
 
@@ -44,7 +44,9 @@
           <lit-list-item id="item-10">🎉 10. Robust Vitest Green Suite</lit-list-item>
         </lit-list>
 
-        <div class="actions">
+        <div class="actions horizontal">
+          <lit-button id="btn-left">left</lit-button>
+          <lit-button id="btn-center">center</lit-button>
           <lit-button id="btn-next">Next Page ➔</lit-button>
         </div>
       </div>

@@ -1,7 +1,13 @@
-import { SpatialNavigationManager } from './index';
+import './index'; // 컴포넌트 자동 등록 사이드 이펙트 유지
+import './components/spatial-debug-overlay';
+import { JsSpatialNavigationManager } from './spatial-navigation/js-manager';
 
-// 1. D-pad 공간 내비게이션 엔진 전역 활성화
-SpatialNavigationManager.start();
+const debugOverlay = document.createElement('spatial-debug-overlay');
+document.body.appendChild(debugOverlay);
+
+// 1. D-pad 공간 내비게이션 엔진 전역 활성화 (새 매니저 사용)
+// SpatialNavigationManager.start();
+JsSpatialNavigationManager.start();
 
 const pageHome = document.getElementById('page-home') as HTMLElement;
 const pageDetail = document.getElementById('page-detail') as HTMLElement;
