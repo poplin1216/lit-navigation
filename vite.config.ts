@@ -43,5 +43,8 @@ export default defineConfig(({ mode }) => {
     server: {
       port: 3000,
     },
+    optimizeDeps: {
+      exclude: ['@ionic/core', '@ionic/core/loader']
+    }
   };
 });

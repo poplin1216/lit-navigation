@@ -23,8 +23,12 @@ export class JsSpatialNavigationManager {
     SpatialNavigation.init();
 
     // 포커스 대상 지정: tabindex="0"을 가진 모든 요소
+    // inert 속성이 부여된 요소와 그 하위 요소는 포커스 대상에서 제외합니다.
     SpatialNavigation.add({
       selector: '[tabindex="0"]',
+      navigableFilter: (element: HTMLElement) => {
+        return !element.closest('[inert]');
+      }
     });
 
     // 기본적으로 DOM에 있는 엘리먼트들을 포커스 가능 상태로 만듦

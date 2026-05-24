@@ -48,6 +48,7 @@ export class SpatialDebugOverlay extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     window.addEventListener('sn:focused', this.handleFocus);
+    window.addEventListener('focusin', this.handleFocus);
     window.addEventListener('keydown', this.handleKeydown);
     window.addEventListener('resize', this.updateOverlay);
     window.addEventListener('scroll', this.updateOverlay, true);
@@ -56,6 +57,7 @@ export class SpatialDebugOverlay extends LitElement {
   disconnectedCallback() {
     super.disconnectedCallback();
     window.removeEventListener('sn:focused', this.handleFocus);
+    window.removeEventListener('focusin', this.handleFocus);
     window.removeEventListener('keydown', this.handleKeydown);
     window.removeEventListener('resize', this.updateOverlay);
     window.removeEventListener('scroll', this.updateOverlay, true);
@@ -74,7 +76,7 @@ export class SpatialDebugOverlay extends LitElement {
     }
   };
 
-  private handleFocus = () => {
+  private handleFocus = (e?: Event) => {
     if (this.enabled) {
       setTimeout(() => this.updateOverlay(), 0);
     }
@@ -88,7 +90,12 @@ export class SpatialDebugOverlay extends LitElement {
 
     let active = document.activeElement as HTMLElement | null;
 
+    // Shadow DOM을 파고들되, 현재 요소가 spatial-navigation-js의 대상(tabindex 존재)이면
+    // 더 파고들지 않고 호스트 요소를 active 요소로 간주합니다.
     while (active && active.shadowRoot && active.shadowRoot.activeElement) {
+      if (active.hasAttribute('tabindex')) {
+        break;
+      }
       active = active.shadowRoot.activeElement as HTMLElement;
     }
 

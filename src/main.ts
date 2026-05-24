@@ -1,3 +1,7 @@
+import '@ionic/core/css/ionic.bundle.css';
+import { defineCustomElements } from '@ionic/core/loader';
+defineCustomElements();
+
 import './index'; // 컴포넌트 자동 등록 사이드 이펙트 유지
 import './components/spatial-debug-overlay';
 import { JsSpatialNavigationManager } from './spatial-navigation/js-manager';
@@ -11,6 +15,7 @@ JsSpatialNavigationManager.start();
 
 const pageHome = document.getElementById('page-home') as HTMLElement;
 const pageDetail = document.getElementById('page-detail') as HTMLElement;
+const pageIonic = document.getElementById('page-ionic') as HTMLElement;
 const modal = document.getElementById('modal-dialog') as any;
 
 // 앱 컨테이너 확보
@@ -19,6 +24,7 @@ const appContainer = document.getElementById('app-container') as HTMLElement;
 // 초기 설정: page-detail을 DOM에서 일시 분리하여 page-home만 스택 최상단 활성 상태로 시작
 pageDetail.style.display = 'block'; // 숨김 속성 제거
 // pageDetail.remove();
+pageIonic.remove(); // Ionic 페이지는 처음에 분리해둠
 
 // 2. 페이지 1 -> 페이지 2 화면 전환 (물리적 unmount/mount 연동)
 document.getElementById('btn-next')?.addEventListener('click', () => {
@@ -70,5 +76,25 @@ document.getElementById('btn-modal-confirm')?.addEventListener('click', () => {
 
   setTimeout(() => {
     document.getElementById('btn-modal-open')?.focus();
+  }, 10);
+});
+
+// 7. Ionic Demo 페이지 화면 전환
+document.getElementById('btn-ionic-demo')?.addEventListener('click', () => {
+  appContainer.appendChild(pageIonic);
+  pageIonic.style.display = 'block';
+
+  // 화면 전환 후 D-pad 첫 요소 포커싱 유도
+  setTimeout(() => {
+    (document.querySelector('ion-segment-button') as HTMLElement)?.focus();
+  }, 10);
+});
+
+// 8. Ionic Demo -> Home 화면 전환 복구
+document.getElementById('btn-ionic-back')?.addEventListener('click', () => {
+  pageIonic.remove();
+
+  setTimeout(() => {
+    document.getElementById('btn-ionic-demo')?.focus();
   }, 10);
 });

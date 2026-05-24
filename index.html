@@ -48,6 +48,7 @@
           <lit-button id="btn-left">left</lit-button>
           <lit-button id="btn-center">center</lit-button>
           <lit-button id="btn-next">Next Page ➔</lit-button>
+          <lit-button id="btn-ionic-demo" style="--indigo: #8b5cf6;">Ionic Demo</lit-button>
         </div>
       </div>
     </lit-page>
@@ -64,6 +65,63 @@
         <div class="actions vertical">
           <lit-button id="btn-modal-open">Open Premium Dialog</lit-button>
           <lit-button id="btn-back" class="secondary">◀ Back to Home</lit-button>
+        </div>
+      </div>
+    </lit-page>
+
+    <!-- 페이지 3: Ionic Demo -->
+    <lit-page id="page-ionic" style="display: none;">
+      <div class="screen-card">
+        <h2>Page 3: Ionic Framework Demo</h2>
+        <p class="description">
+          Testing spatial navigation across complex Shadow DOM structures in Ionic components.
+        </p>
+
+        <ion-segment value="tab1">
+          <ion-segment-button tabindex="0" value="tab1">
+            <ion-label>Tab 1</ion-label>
+          </ion-segment-button>
+          <ion-segment-button tabindex="0" value="tab2">
+            <ion-label>Tab 2</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-card>
+                <ion-card-header>
+                  <ion-card-title>Card 1</ion-card-title>
+                </ion-card-header>
+                <ion-card-content>
+                  <ion-button tabindex="0" expand="block">Button A</ion-button>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+            <ion-col>
+              <ion-card>
+                <ion-card-header>
+                  <ion-card-title>Card 2</ion-card-title>
+                </ion-card-header>
+                <ion-card-content>
+                  <ion-button tabindex="0" expand="block" color="secondary">Button B</ion-button>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+        <ion-list>
+          <ion-item>
+            <ion-input label="Name" placeholder="Enter name" tabindex="0"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-toggle justify="space-between" tabindex="0">Enable Feature</ion-toggle>
+          </ion-item>
+        </ion-list>
+
+        <div class="actions vertical" style="margin-top: 20px;">
+          <lit-button id="btn-ionic-back" class="secondary">◀ Back to Home</lit-button>
         </div>
       </div>
     </lit-page>
